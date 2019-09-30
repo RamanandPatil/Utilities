@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-public class FileRenamer {
+public class FileRename {
     public static void main(java.lang.String[] args) {
 
         //working folder
@@ -31,17 +31,24 @@ public class FileRenamer {
         }
     }
 
-    public static void renameFiles(String dir, String replace, String replaceBy) {
+
+
+    public static void renameFiles(String dir, String replace,
+                                   String replaceBy) {
         try {
             try (Stream<Path> stream = Files.find(Paths.get(dir), 3,
-                    (path, attr) -> String.valueOf(path).endsWith(".Pdf"))) {
+                                                  (path, attr) -> String
+                                                          .valueOf(path)
+                                                          .endsWith(".Pdf"))) {
                 stream.map(String::valueOf).forEach(item -> {
-                            try {
-                                Files.move(new File(item).toPath(), new File(item.replace(replace, replaceBy)).toPath());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
+                                                        try {
+                                                            Files.move(new File(item).toPath(),
+                                                                       new File(item.replace(replace, replaceBy))
+                                                                               .toPath());
+                                                        } catch (IOException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
                 );
             }
 
