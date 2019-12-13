@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 public class FileRename {
-    public static void main(java.lang.String[] args) {
+    public static void main(String[] args) throws IOException {
 
         //working folder
         String dir = "D:\\Downloads\\20181216";
@@ -21,39 +21,30 @@ public class FileRename {
 
     public static void listFiles(String dir) {
         try {
-            Files.find(Paths.get(dir),
-                    Integer.MAX_VALUE,
-                    (filePath, fileAttr) -> fileAttr.isRegularFile())
-                    .forEach(System.out::println);
-
+            Files.find(Paths.get(dir), Integer.MAX_VALUE,
+                       (filePath, fileAttr) -> fileAttr.isRegularFile())
+                 .forEach(System.out::println);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
-
-    public static void renameFiles(String dir, String replace,
-                                   String replaceBy) {
-        try {
-            try (Stream<Path> stream = Files.find(Paths.get(dir), 3,
-                                                  (path, attr) -> String
-                                                          .valueOf(path)
-                                                          .endsWith(".Pdf"))) {
-                stream.map(String::valueOf).forEach(item -> {
-                                                        try {
-                                                            Files.move(new File(item).toPath(),
-                                                                       new File(item.replace(replace, replaceBy))
-                                                                               .toPath());
-                                                        } catch (IOException e) {
-                                                            e.printStackTrace();
-                                                        }
-                                                    }
-                );
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static void renameFiles(String dir, String replace, String replaceBy)
+            throws IOException {
+        try (Stream<Path> stream = Files.find(Paths.get(dir), 3,
+                                              (path, attr) ->
+                                                      String.valueOf(path)
+                                                            .endsWith(".Pdf"))) {
+            stream.map(String::valueOf).forEach(item -> {
+                try {
+                    Files.move(new File(item).toPath(),
+                               new File(item.replace(replace, replaceBy))
+                                       .toPath());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
