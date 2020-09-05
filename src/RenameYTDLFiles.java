@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 
 public class RenameYTDLFiles {
     public static void main(String[] args) {
-        String pathname = "Y:\\Channels\\JavaMagArticles";
+        String pathname = "Y:\\Channels\\ON DEMAND CODING";
         renameFiles(pathname, "^[0-9]+ - ");
     }
 
