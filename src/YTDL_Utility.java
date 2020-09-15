@@ -8,6 +8,8 @@ public class YTDL_Utility {
 
 
     // Output file name formats:
+    public static final String OUTPUT_INDEX_TITLE =
+            " -o '%(playlist_index)s - %(title)s.%(ext)s'";
     public static final String OUTPUT_PL_INDEX_TITLE =
             " -o '%(playlist_index)s - %(title)s.%(ext)s'";
     public static final String OUTPUT_PL_TITLE =
